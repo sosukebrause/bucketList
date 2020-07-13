@@ -4388,7 +4388,7 @@ nav .brand-logo.center {
   transform: translateX(-50%);
 }
 
-@media only screen and (max-width: 998px) {
+@media only screen and (max-width: 992px) {
   nav .brand-logo {
     left: 50%;
     -webkit-transform: translateX(-50%);

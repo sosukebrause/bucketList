@@ -5,23 +5,17 @@
  *
  * Made By MaterializeCSS.com
  */
+.brand-logo {
+  /* color: #2c2c2c; */
+  font-family: "Bungee", cursive;
+  color: #444;
+  letter-spacing: 0.05em;
+  text-shadow: 3px 3px 0px #d5d5d5, 5px 5px 0px rgba(0, 0, 0, 0.2);
+}
 
 nav ul a,
 nav .brand-logo {
-  color: #444;
-  font-family: "Bungee", cursive;
-}
-
-h2 {
-  font-family: "Bungee", cursive;
-  text-shadow: 1px -2px white;
-}
-
-h2.retro-shadow {
-  color: #2c2c2c;
-  background-color: #d5d5d5;
-  letter-spacing: 0.05em;
-  text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
+  color: rgb(238, 64, 151);
 }
 
 p {
