@@ -16,7 +16,6 @@
 }
 
 .materialize-red-text.text-lighten-5 {
-  text-shadow: 1px -2px 0 #767676;
   color: #fdeaeb !important;
 }
 
@@ -4389,11 +4388,12 @@ nav .brand-logo.center {
   transform: translateX(-50%);
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 998px) {
   nav .brand-logo {
     left: 50%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
+    font-size: 2rem;
   }
   nav .brand-logo.left,
   nav .brand-logo.right {

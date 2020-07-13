@@ -9,11 +9,20 @@
 nav ul a,
 nav .brand-logo {
   color: #444;
+  font-family: "Bungee", cursive;
 }
 
-h1 {
+h2 {
+  font-family: "Bungee", cursive;
   text-decoration: line-through;
   text-shadow: 1px -2px white;
+}
+
+h2.retro-shadow {
+  color: #2c2c2c;
+  background-color: #d5d5d5;
+  letter-spacing: 0.05em;
+  text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
 p {
