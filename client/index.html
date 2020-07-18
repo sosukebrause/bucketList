@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Group-4-Project-2</title>
+
+    <!-- CSS  -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Bungee&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="css/materialize.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen,projection"
+    />
+    <link
+      href="css/style.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen,projection"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="white my-nav" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo left retro-shadow"
+          >Book it!</a
+        >
+      </div>
+    </nav>
+
+    <!-- side nav  -->
+
+    <ul id="slide-out" class="sidenav collapsible popout">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img class="img-responsive" src="/img/bgr-everest2.jpg" />
+          </div>
+          <!-- <a href="#user"><img id="navatar" class="circle" src="#" /></a> -->
+
+          <span id="userName" class="white-text name size-4"
+            >Name Placeholder</span
+          >
+          <span id="userEmail" class="white-text email">Email Placeholder</span>
+        </div>
+      </li>
+
+      <li>
+        <div class="collapsible-header">
+          <a><i class="material-icons">cloud</i>LOG IN!</a>
+        </div>
+
+        <div class="collapsible-body">
+          <!-- log in email input -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="text" id="loginEmailInput" />
+              <label>Enter your email</label>
+            </div>
+          </div>
+
+          <!-- log in password input -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="password" id="loginPwInput" />
+              <label>Enter your password</label>
+              <button
+                id="loginSubmit"
+                type="submit"
+                class="col s12 btn btn-large waves-effect indigo"
+              >
+                Click to Log In!
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="collapsible-header">
+          <a><i class="material-icons">cloud</i>SIGN UP!</a>
+        </div>
+        <div class="collapsible-body">
+          <!-- email for sign up -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="text" id="emailInput" />
+              <label>Enter your email</label>
+            </div>
+          </div>
+
+          <!-- pw for sign up -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="password" id="pwInput" />
+              <label>Enter your password</label>
+            </div>
+          </div>
+
+          <!-- username for sign up -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="text" id="unInput" />
+              <label>Enter a Username</label>
+              <button
+                id="signupSubmit"
+                type="submit"
+                class="col s12 btn btn-large waves-effect indigo"
+              >
+                Click to Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="row">
+      <div class="container">
+        <div class="signup-nav">
+          <a href="#" data-target="slide-out" class="sidenav-trigger"
+            ><i class="material-icons small">account_circle</i></a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- side nav ends -->
+
+    <div id="index-banner" class="parallax-container" style="margin-top: 5rem;">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <br /><br />
+          <h3 class="header center teal-text text-lighten-2">
+            Personalized Bucket List
+          </h3>
+          <div class="row center">
+            <h5 class="header col s12 light">
+              Your wildest dreams, all in one place
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="parallax">
+        <img src="./img/bgr-everest.jpg" alt="Mt Everest" />
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <div class="row">
+          <div class="col s12 m6">
+            <div class="icon-block">
+              <h2 class="center brown-text">
+                <i class="material-icons">settings</i>
+              </h2>
+              <h5 class="center">How it works</h5>
+
+              <p class="light">
+                Create, update, or remove any awesome ideas with ease, while
+                sharing your activity like-minded users.
+              </p>
+            </div>
+          </div>
+
+          <div class="col s12 m6">
+            <div class="icon-block">
+              <h2 class="center brown-text">
+                <i class="material-icons">group</i>
+              </h2>
+              <h5 class="center">User Focused</h5>
+
+              <p class="light">
+                An interactive platform with up to date news feeds and a chance
+                to connect with others.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="parallax-container valign-wrapper">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <h3 class="header center teal-text text-lighten-2">
+            Continue as guest to view public activity
+          </h3>
+          <div class="row center">
+            <h5 class="header col s12 light">
+              See what people are dying to do, before they die!
+            </h5>
+          </div>
+          <div class="row center">
+            <a
+              href="feed.html"
+              id="button"
+              class="btn-large waves-effect waves-light teal lighten-1"
+              >View Feed</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="parallax">
+        <img src="./img/bgr-ballet.jpg" alt="ballerina" />
+      </div>
+    </div>
+
+    <footer class="page-footer teal">
+      <div class="container hide-on-med-and-down">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Company Bio</h5>
+            <p class="grey-text text-lighten-4">
+              We are a team of college students working on this project like
+              it's our full time job. Any amount would help support and continue
+              development on this project and is greatly appreciated.
+            </p>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Team</h5>
+            <ul>
+              <li><a class="white-text" href="#!">James</a></li>
+              <li><a class="white-text" href="#!">Mate</a></li>
+              <li><a class="white-text" href="#!">Louanne</a></li>
+              <li><a class="white-text" href="#!">Sosk</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Connect</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Tinder Profile</a></li>
+              <li><a class="white-text" href="#!">Reddit Bio</a></li>
+              <li><a class="white-text" href="#!">OkCupid</a></li>
+              <li><a class="white-text" href="#!">Chatroullete</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          Made by
+          <a class="brown-text text-lighten-3" href="#">UCB Coding BootCamp</a>
+        </div>
+      </div>
+    </footer>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="./assets/login.js"></script>
+    <script src="./assets/signup.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+  </body>
+</html>

@@ -1,86 +1,112 @@
 $(document).ready(function () {
+  let userID;
+  let userName;
+  let userEmail;
+
+  // get the user currently logged in
+  $.ajax({
+    type: "GET",
+    url: "/api/user_data",
+  }).then((user) => {
+    console.log(user);
+    userID = user.id;
+    // userName = user.userName
+    userEmail = user.email;
+  });
+
+  // create a function to return all todos from DB
+  const getTodos = () => {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: "GET",
+        url: "/api/all",
+      }).then((res) => {
+        resolve(res);
+      });
+    });
+  };
+
+  // run the getTodos function, then run the render function with the result
   getTodos().then((res) => {
     renderTodos(res);
   });
 
-  $("#submitBtn").on("click", () => {
-    const todoText = $("#todoText").val();
-    $.ajax({
-      type: "POST",
-      url: "/api",
-      data: { text: todoText },
-    }).then((res) => {
-      getTodos().then((res) => {
-        renderTodos(res);
-      });
-    });
-    $("#todoText").val("");
-  });
-});
-
-const getTodos = () => {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      type: "GET",
-      url: "/api",
-    })
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((err) => console.log(err));
-  });
-};
-
-$(document).on("click", "#btnUpdate", function () {
-  const todoID = $(this).attr("data-id");
-
-  window.location.href = `/edit?id=${todoID}`;
-});
-
-$(document).on("click", "#btnDelete", function () {
-  const todoID = $(this).attr("data-id");
-
-  window.location.href = `/delete?id=${todoID}`;
-});
-
-const renderTodos = (arr) => {
-  $(".card-container").html("");
-  arr.forEach((todo) => {
-    let msg = todo.completed
-      ? "✅ &nbsp; Finished todo"
-      : "❌ &nbsp; Need to do";
-    $(".card-container").prepend(
-      `
-      <div class="card mb-2">
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-muted">
-            ${msg}
-          </h6>
-          <p class="card-text">
-            ${todo.text}
-          </p>
-
-          <div class="text-center">
-            <button
-              id="btnUpdate" 
-              data-id=${todo.id}
-              style="width: 150px;"
-              class="btn btn-outline-success mr-2"
-            >
-              Edit
-            </button>
-            <button
-              id="btnDelete" 
-              data-id=${todo.id}
-              style="width: 150px;"
-              class="btn btn-outline-danger ml-2"
-            >
-              Delete
-            </button>
+  // define the render function
+  const renderTodos = (arr) => {
+    console.log(arr);
+    $(".card-container").html("");
+    arr.forEach((todo) => {
+      $(".card-container").prepend(`
+      <div class="row">
+        <div class="container col s12 m10 offset-m1" style="margin-top: 5rem;">
+          <h5>card reveal with carousel</h5>
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <div class="carousel carousel-slider center">
+                <!-- div w/ img tag for img1 -->
+                <!-- <div class="carousel-item red white-text" href="#one!"> -->
+                  <img class="activator" src="${todo.imageURL}" />
+                <!-- </div> -->
+                <!-- div needs img tag for img2 -->
+                <!-- <div class="carousel-item amber white-text" href="#two!">
+                  <img class="activator" src="#" />
+                </div> -->
+              </div>
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4"
+                >${todo.title}<i class="material-icons right">more_vert</i></span
+              >
+              <p><a class="userName">User Name</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"
+                >Card Title<i class="material-icons right">close</i></span
+              >
+              <p class="details">
+                ${todo.details}
+              </p> <br>
+              <p class="imptURL">${todo.imptURL}</p>
+            </div>
           </div>
         </div>
       </div>
-    `
-    );
-  });
-};
+      `);
+      //     `
+      //   Jim added an item to ${todo.category}
+      //   <div class="row">
+      //     <div class="col s12 m10 offset-m1" >
+      //       <h5>card reveal with carousel</h5>
+      //       <div class="card">
+      //         <div class="card-image waves-effect waves-block waves-light">
+      //           <div class="carousel carousel-slider center">
+      //             <div class="carousel-item red white-text" href="#one!">
+      //               <img class="activator" src="${todo.imgURL}" />
+      //             </div>
+      //           </div>
+      //         </div>
+      //         <div class="card-content">
+      //           <span class="card-title activator grey-text text-darken-4"
+      //             >Visit Paris<i class="material-icons right">more_vert</i></span
+      //           >
+      //           <p><a href="#">${user}</a></p>
+      //         </div>
+      //         <div class="card-reveal">
+      //           <span class="card-title grey-text text-darken-4"
+      //             >${todo.title}<i class="material-icons right">close</i></span
+      //           >
+      //           <p>
+      //             ${todo.details}
+      //             <br>
+      //             ${todo.imptURL}
+
+      //           </p>
+
+      //         </div>
+      //       </div>
+      //     </div>
+      //   </div>
+      // `
+    });
+  };
+});

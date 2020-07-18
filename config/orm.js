@@ -6,19 +6,12 @@ connection.connect((err) => {
   if (err) throw err;
 });
 
-const seeAllTodos = () => {
-  return new Promise((resolve, reject) => {
-    connection.query("SELECT * FROM todos", (err, data) => {
-      err ? reject(err) : resolve(data);
-    });
-  });
-};
-
-const showTodo = (todoID) => {
+const seeAllPosts = () => {
   return new Promise((resolve, reject) => {
     connection.query(
-      "SELECT * FROM todos WHERE ?",
-      { id: todoID },
+      `SELECT * FROM posts 
+    LEFT JOIN users ON
+    users.id = posts.userId`,
       (err, data) => {
         err ? reject(err) : resolve(data);
       }
@@ -26,29 +19,45 @@ const showTodo = (todoID) => {
   });
 };
 
-const addTodo = (userText) => {
-  return new Promise((resolve, reject) => {
-    connection.query("INSERT INTO todos SET ?", [{ text: userText }], (err) => {
-      err ? reject(err) : resolve("Success");
-    });
-  });
-};
-
-const deleteTodo = (todoID) => {
-  return new Promise((resolve, reject) => {
-    connection.query("DELETE FROM todos WHERE ?", [{ id: todoID }], (err) => {
-      err ? reject(err) : resolve("Deleted!");
-    });
-  });
-};
-
-const editTodo = (obj) => {
+const userPost = (userIdInput) => {
   return new Promise((resolve, reject) => {
     connection.query(
-      "UPDATE todos SET ? WHERE ?",
+      `SELECT * FROM posts 
+      LEFT JOIN users ON
+      users.id = posts.userId`,
+      [{ userId: userIdInput }],
+      (err, data) => {
+        err ? reject(err) : resolve(data);
+      }
+    );
+  });
+};
+
+const userOnePost = (postId) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM posts WHERE ?",
+      [{ id: postId }],
+      (err, data) => {
+        err ? reject(err) : resolve(data);
+      }
+    );
+  });
+};
+
+const addPost = (obj) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "INSERT INTO posts SET ?",
       [
-        { text: obj.todoText, completed: obj.todoCompleted },
-        { id: obj.todoId },
+        {
+          userId: obj.userId,
+          category: obj.category,
+          title: obj.title,
+          details: obj.details,
+          imageURL: obj.imageURL,
+          imptURL: obj.imptURL,
+        },
       ],
       (err) => {
         err ? reject(err) : resolve("Success");
@@ -57,4 +66,41 @@ const editTodo = (obj) => {
   });
 };
 
-module.exports = { seeAllTodos, showTodo, addTodo, deleteTodo, editTodo };
+const deletePost = (postId) => {
+  return new Promise((resolve, reject) => {
+    connection.query("DELETE FROM posts WHERE ?", [{ id: postId }], (err) => {
+      err ? reject(err) : resolve("Deleted!");
+    });
+  });
+};
+
+const editPost = (obj) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "UPDATE posts SET ? WHERE ?",
+      [
+        {
+          userId: obj.userId,
+          category: obj.category,
+          title: obj.title,
+          details: obj.details,
+          imageURL: obj.imageURL,
+          imptURL: obj.imptURL,
+        },
+        { id: obj.postId },
+      ],
+      (err) => {
+        err ? reject(err) : resolve("Success");
+      }
+    );
+  });
+};
+
+module.exports = {
+  seeAllPosts,
+  userPost,
+  addPost,
+  deletePost,
+  editPost,
+  userOnePost,
+};

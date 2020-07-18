@@ -1,11 +1,9 @@
 $(document).ready(function () {
-  const loginForm = $("#loginForm");
-  const emailInput = $("#emailInput");
-  const pwInput = $("#pwInput");
+  const emailInput = $("#loginEmailInput");
+  const pwInput = $("#loginPwInput");
 
-  loginForm.on("submit", function (e) {
-    e.preventDefault();
-
+  $("#loginSubmit").on("click", () => {
+    console.log("clicked");
     const User = {
       email: emailInput.val().trim(),
       password: pwInput.val().trim(),
@@ -17,7 +15,7 @@ $(document).ready(function () {
       data: User,
     }).then(() => {
       //from Client Routes
-      window.location.replace("/home");
+      window.location.replace("/feed");
     });
   });
 });

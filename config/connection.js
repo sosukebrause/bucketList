@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-
+const password = require("./pw");
 let connection;
 
 if (process.env.JAWSDB_URL) {

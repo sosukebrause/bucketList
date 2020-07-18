@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
   "workbench.colorTheme": "Overnight Slumber Italics",
   "liveServer.settings.port": 5501
+=======
+  "liveServer.settings.port": 5501,
+  "workbench.colorTheme": "Ayu Mirage Bordered"
+>>>>>>> ec113cdbe54e83389eb90e148f04a59ec6c01209
 }

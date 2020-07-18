@@ -2,8 +2,12 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../config/passport.js");
 const db = require("../models");
+const axios = require("axios");
+require("dotenv").config();
+
 
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
+  userId = parseInt(req.user.id);
   res.json({ email: req.user.email, id: req.user.id });
 });
 
@@ -11,6 +15,7 @@ router.post("/api/signup", (req, res) => {
   db.User.create({
     email: req.body.email,
     password: req.body.password,
+    userName: req.body.userName,
   })
     .then(() => {
       res.redirect(307, "/api/login");
@@ -30,48 +35,80 @@ router.get("/api/user_data", (req, res) => {
 });
 
 const {
-  seeAllTodos,
-  showTodo,
-  addTodo,
-  deleteTodo,
-  editTodo,
+  seeAllPosts,
+  userPost,
+  userOnePost,
+  addPost,
+  deletePost,
+  editPost,
 } = require("../config/orm");
 
-// see all todos--working, showing todos on web
-router.get("/api", (req, res) => {
-  seeAllTodos()
-    .then((allTodos) => res.json(allTodos))
+router.get("/api/omdb/:title", (req, res) => {
+  axios
+    .get(
+      `https://www.omdbapi.com/?t=${req.params.title}&apikey=${process.env.OMDB_API}`
+    )
+    .then((response) => {
+      res.json(response.data);
+    })
     .catch((err) => res.json(err));
 });
 
-// search single todo by ID, working on web.
-router.get("/api/find/:id", (req, res) => {
-  showTodo(parseInt(req.params.id))
-    .then((todo) => res.json(todo))
+// see all todos--working, showing todos on web
+router.get("/api/all", (req, res) => {
+  seeAllPosts()
+    .then((allPosts) => res.json(allPosts))
+    .catch((err) => res.json(err));
+});
+
+// search single todo by user ID, working on web.
+router.get("/api/find/", (req, res) => {
+  userPost(userId)
+    .then((userPosts) => res.json(userPosts))
+    .catch((err) => res.json(err));
+});
+
+// search a single todo by its ID, working on web.
+router.get("/api/findpost/:postId", (req, res) => {
+  userOnePost(parseInt(req.params.postId))
+    .then((userPosts) => res.json(userPosts))
     .catch((err) => res.json(err));
 });
 
 // create a new todo, shows all todos working on web.
-router.post("/api", (req, res) => {
-  addTodo(req.body.text)
+router.post("/api/add", (req, res) => {
+  let newPost = {
+    userId: req.body.userId,
+    category: req.body.category,
+    title: req.body.title,
+    details: req.body.details,
+    imageURL: req.body.imageURL,
+    imptURL: req.body.imptURL,
+  };
+  addPost(newPost)
     .then((submitResult) => res.json(submitResult))
     .catch((err) => res.json(err));
 });
 
 // delete a todo; works on postman, not on web.
-router.delete("/api/delete/:id", (req, res) => {
-  deleteTodo(parseInt(req.params.id))
+router.delete("/api/delete", (req, res) => {
+  deletePost(parseInt(req.body.postId))
     .then((delRes) => res.json(delRes))
     .catch((err) => res.json(err));
 });
 
 // edit a todo; works on postman, not on web.
-router.patch("/api", (req, res) => {
-  editTodo({
-    todoText: req.body.todoText,
-    todoId: parseInt(req.body.todoId),
-    todoCompleted: req.body.todoCompleted === "false" ? false : true,
-  })
+router.patch("/api/update", (req, res) => {
+  let updatedPost = {
+    postId: req.body.postId,
+    userId: req.body.userId,
+    category: req.body.category,
+    title: req.body.title,
+    details: req.body.details,
+    imageURL: req.body.imageURL,
+    imptURL: req.body.imptURL,
+  };
+  editPost(updatedPost)
     .then((editRes) => res.json(editRes))
     .catch((err) => res.json(err));
 });
